@@ -1,3 +1,5 @@
+# rubocop:disable Layout/LineLength
+
 class Scanner
   attr_reader :file, :linter_errors
 
@@ -17,6 +19,7 @@ class Scanner
       import_single_line(index, line)
       withespace_inside_pbb(index, line)
       withespace_before_csc(index, line)
+      whitespace_before_operator(index, line)
       index += 1
     end
   end
@@ -57,4 +60,10 @@ class Scanner
       index += 1
     end
   end
+
+  def whitespace_before_operator(index, line)
+    @linter_errors[index + 1] = 'More than one space around an assignment operator' if line.match(%r{.*\s{2,}(=|\+=|-=|\*=|\/=|\/\/=|%=|\*\*=).*})
+  end
 end
+
+# rubocop:enable Layout/LineLength
