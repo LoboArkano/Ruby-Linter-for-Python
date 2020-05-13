@@ -84,7 +84,7 @@ class Scanner
   end
 
   def first_word(line)
-    line.split(' ')
+    line = line.split(' ')
     line[0]
   end
 
