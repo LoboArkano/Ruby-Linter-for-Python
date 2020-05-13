@@ -87,6 +87,14 @@ describe 'Scanner' do
       expect(python_file.blank_line?(line2)).to eql(false)
     end
   end
+
+  describe '#first_word' do
+    let(:line) { "name = 'Jhon'" }
+    let(:line2) { '' }
+    it 'Return the first element of an array after use split method on a string' do
+      expect(python_file.first_word(line)).to eql('name')
+    end
+  end
 end
 
 # rubocop:enable Layout/LineLength
