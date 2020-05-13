@@ -10,6 +10,9 @@ class Scanner
 
   def self.scan_file(path_file)
     Scanner.new(IO.readlines(path_file, chomp: true))
+  rescue Errno::ENOENT
+    puts 'No such file or directory'
+    Scanner.new([''])
   end
 
   def linter_on
