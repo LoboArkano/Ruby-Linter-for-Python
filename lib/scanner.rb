@@ -73,8 +73,8 @@ class Scanner
   def names_to_avoid(index, line)
     return if blank_line?(line)
 
-    line = first_word(line)
-    @linter_errors[index + 1] = "Never use the characters 'l' (lowercase letter el), 'O' (uppercase letter oh), or 'I' (uppercase letter eye) as single character variable names." if line[0].match(/^(I|l|O)$/)
+    word = first_word(line)
+    @linter_errors[index + 1] = "Never use the characters 'l' (lowercase letter el), 'O' (uppercase letter oh), or 'I' (uppercase letter eye) as single character variable names." if word.match(/^(I|l|O)$/)
   end
 
   def blank_line?(line)
@@ -85,6 +85,7 @@ class Scanner
 
   def first_word(line)
     line.split(' ')
+    line[0]
   end
 
   def check_identation(index, line)
