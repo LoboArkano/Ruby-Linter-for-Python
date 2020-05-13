@@ -95,6 +95,24 @@ describe 'Scanner' do
       expect(python_file.first_word(line)).to eql('name')
     end
   end
+
+  describe '#check_identation' do
+    let(:line) { "   print('Wrong indentation')" }
+    let(:line2) { '    else:' }
+    let(:line3) { '' }
+    it 'Insert key and value in the hash when unindent does not match any outer indentation level' do
+      expect { python_file.check_identation(0, line) }.to change(python_file, :linter_errors)
+      expect(python_file.linter_errors[1]).to eql('Unindent does not match any outer indentation level')
+    end
+    it 'Return nil if the indentation is correct' do
+      expect { python_file.check_identation(0, line2) }.not_to change(python_file, :linter_errors)
+      expect(python_file.linter_errors[1]).to eql(nil)
+    end
+    it 'Return nil if the line is empty' do
+      expect { python_file.check_identation(0, line3) }.not_to change(python_file, :linter_errors)
+      expect(python_file.linter_errors[1]).to eql(nil)
+    end
+  end
 end
 
 # rubocop:enable Layout/LineLength
