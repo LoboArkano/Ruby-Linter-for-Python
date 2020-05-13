@@ -22,11 +22,11 @@ class Scanner
   end
 
   def max_line_length(index, line)
-    @linter_errors[index] = "Max line length is 79, yours line is #{line.length}" if line.length > 79
+    @linter_errors[index + 1] = "Max line length is 79, yours line is #{line.length}" if line.length > 79
   end
 
   def import_single_line(index, line)
-    @linter_errors[index] = 'Imports should be on separate line' if line.match(/^import.+,.*/)
+    @linter_errors[index + 1] = 'Imports should be on separate line' if line.match(/^import.+,.*/)
   end
 
   def withespace_inside_pbb(line_index, line)
@@ -35,11 +35,11 @@ class Scanner
     index = 0
     line.split('').each do |char|
       if matches1.include?(char) && line[index + 1] == ' '
-        @linter_errors[line_index] = 'Whitespace inside after parentheses, brackets or braces'
+        @linter_errors[line_index + 1] = 'Whitespace inside after parentheses, brackets or braces'
         break
       end
       if matches2.include?(char) && line[index - 1] == ' '
-        @linter_errors[line_index] = 'Whitespace inside before parentheses, brackets or braces'
+        @linter_errors[line_index + 1] = 'Whitespace inside before parentheses, brackets or braces'
         break
       end
       index += 1
