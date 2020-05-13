@@ -37,6 +37,19 @@ describe 'Scanner' do
       expect(python_file.import_single_line(0, line2)).to eql(nil)
     end
   end
+
+  describe '#withespace_inside_pbb' do
+    let(:line) { 'x = ( x + 1 ) - 5' }
+    let(:line2) { "print('Hello World!')" }
+    it 'Insert key and value in the hash when whitespace inside after parentheses, brackets or braces' do
+      expect { python_file.withespace_inside_pbb(0, line) }.to change(python_file, :linter_errors)
+      expect(python_file.linter_errors[1]).to eql('Whitespace inside after parentheses, brackets or braces')
+    end
+    it "Return nil if the line don't have space inside of parentheses, brackets or braces" do
+      expect { python_file.withespace_inside_pbb(0, line2) }.not_to change(python_file, :linter_errors)
+      expect(python_file.linter_errors[1]).to eql(nil)
+    end
+  end
 end
 
 # rubocop:enable Layout/LineLength
