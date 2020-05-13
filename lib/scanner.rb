@@ -21,6 +21,7 @@ class Scanner
       withespace_before_csc(index, line)
       whitespace_before_operator(index, line)
       names_to_avoid(index, line)
+      check_identation(index, line)
       index += 1
     end
   end
@@ -69,7 +70,7 @@ class Scanner
   def names_to_avoid(index, line)
     return if blank_line?(line)
 
-    line = line.split(' ')
+    line = first_word(line)
     @linter_errors[index + 1] = "Never use the characters 'l' (lowercase letter el), 'O' (uppercase letter oh), or 'I' (uppercase letter eye) as single character variable names." if line[0].match(/^(I|l|O)$/)
   end
 
@@ -77,6 +78,22 @@ class Scanner
     return true if line.length.zero?
 
     false
+  end
+
+  def first_word(line)
+    line.split(' ')
+  end
+
+  def check_identation(index, line)
+    return if blank_line?(line)
+
+    count_space = 0
+    line.split('').each do |char|
+      break if char != ' '
+
+      count_space += 1
+    end
+    @linter_errors[index + 1] = 'Unindent does not match any outer indentation level' if count_space % 4 != 0
   end
 end
 
