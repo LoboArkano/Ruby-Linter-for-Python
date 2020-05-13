@@ -15,6 +15,7 @@ class Scanner
     @file.each do |line|
       max_line_length(index, line)
       import_single_line(index, line)
+      withespace_inside_pbb(index, line)
       index += 1
     end
   end
@@ -25,5 +26,24 @@ class Scanner
 
   def import_single_line(index, line)
     @linter_errors[index] = 'Imports should be on separate line' if line.match(/^import.+,.*/)
+  end
+
+  def withespace_inside_pbb(line_index, line)
+    matches1 = '{[('
+    matches2 = '}])'
+    index = 0
+    line.class
+    line = line.split('')
+    line.each do |char|
+      if matches1.include?(char) && line[index + 1] == ' '
+        @linter_errors[line_index] = 'Whitespace inside after parentheses, brackets or braces'
+        break
+      end
+      if matches2.include?(char) && line[index - 1] == ' '
+        @linter_errors[line_index] = 'Whitespace inside before parentheses, brackets or braces'
+        break
+      end
+      index += 1
+    end
   end
 end
