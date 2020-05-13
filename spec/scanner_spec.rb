@@ -24,6 +24,19 @@ describe 'Scanner' do
       expect { python_file.max_line_length(0, short_line) }.not_to change(python_file, :linter_errors)
     end
   end
+
+  describe '#import_single_line' do
+    let(:line) { 'import sys, os' }
+    it 'Insert key and value in the hash when more of one import is make it in one line' do
+      expect { python_file.import_single_line(0, line) }.to change(python_file, :linter_errors)
+      expect(python_file.linter_errors[1]).to eql('Imports should be on separate line')
+    end
+    let(:line2) { 'while True:' }
+    it "Return nil when the line don't start with import" do
+      expect { python_file.import_single_line(0, line2) }.not_to change(python_file, :linter_errors)
+      expect(python_file.import_single_line(0, line2)).to eql(nil)
+    end
+  end
 end
 
 # rubocop:enable Layout/LineLength
