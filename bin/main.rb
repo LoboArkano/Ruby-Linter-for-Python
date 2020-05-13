@@ -1,8 +1,9 @@
 #!/usr/bin/env ruby
+require_relative '../lib/scanner.rb'
 
 loop do
   print 'Enter the path file: '
   path_file = gets.chomp
-  file = IO.readlines(path_file, chomp: true)
-  break if !file.length.zero? && !file[0].length.zero?
+  main = Scanner.scan_file(path_file)
+  break if !main.file.length.zero? && !main.file[0].length.zero?
 end
