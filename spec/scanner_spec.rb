@@ -50,6 +50,32 @@ describe 'Scanner' do
       expect(python_file.linter_errors[1]).to eql(nil)
     end
   end
+
+  describe '#whitespace_before_operator' do
+    let(:line) { 'x             = 1' }
+    let(:line2) { 'y = 2' }
+    it 'Insert key and value in the hash when more than one space around an assignment operator' do
+      expect { python_file.whitespace_before_operator(0, line) }.to change(python_file, :linter_errors)
+      expect(python_file.linter_errors[1]).to eql('More than one space around an assignment operator')
+    end
+    it 'Return nil if the there is no more than one space around an assignment operator' do
+      expect { python_file.whitespace_before_operator(0, line2) }.not_to change(python_file, :linter_errors)
+      expect(python_file.linter_errors[1]).to eql(nil)
+    end
+  end
+
+  describe '#names_to_avoid' do
+    let(:line) { 'I = 5' }
+    let(:line2) { 'N = 9' }
+    it "Insert key and value in the hash when a variable name is 'l','O' or 'I'" do
+      expect { python_file.names_to_avoid(0, line) }.to change(python_file, :linter_errors)
+      expect(python_file.linter_errors[1]).to eql("Never use the characters 'l' (lowercase letter el), 'O' (uppercase letter oh), or 'I' (uppercase letter eye) as single character variable names.")
+    end
+    it "Return nil if the variable name is diferent from 'l','O' and 'I'" do
+      expect { python_file.names_to_avoid(0, line2) }.not_to change(python_file, :linter_errors)
+      expect(python_file.linter_errors[1]).to eql(nil)
+    end
+  end
 end
 
 # rubocop:enable Layout/LineLength
