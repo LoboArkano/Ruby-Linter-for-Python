@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 require_relative '../lib/scanner.rb'
+main = nil
 
 loop do
   print 'Enter the path file: '
@@ -9,3 +10,4 @@ loop do
 end
 
 main.linter_on
+main.linter_errors.each { |key, value| puts "Line #{key}:  #{value}" }
