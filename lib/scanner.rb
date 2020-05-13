@@ -20,6 +20,7 @@ class Scanner
       withespace_inside_pbb(index, line)
       withespace_before_csc(index, line)
       whitespace_before_operator(index, line)
+      names_to_avoid(index, line)
       index += 1
     end
   end
@@ -63,6 +64,19 @@ class Scanner
 
   def whitespace_before_operator(index, line)
     @linter_errors[index + 1] = 'More than one space around an assignment operator' if line.match(%r{.*\s{2,}(=|\+=|-=|\*=|\/=|\/\/=|%=|\*\*=).*})
+  end
+
+  def names_to_avoid(index, line)
+    return if blank_line?(line)
+
+    line = line.split(' ')
+    @linter_errors[index + 1] = "Never use the characters 'l' (lowercase letter el), 'O' (uppercase letter oh), or 'I' (uppercase letter eye) as single character variable names." if line[0].match(/^(I|l|O)$/)
+  end
+
+  def blank_line?(line)
+    return true if line.length.zero?
+
+    false
   end
 end
 
