@@ -76,6 +76,17 @@ describe 'Scanner' do
       expect(python_file.linter_errors[1]).to eql(nil)
     end
   end
+
+  describe '#blank_line?' do
+    let(:line) { '' }
+    let(:line2) { 'not empty' }
+    it 'Return true if the line is empty' do
+      expect(python_file.blank_line?(line)).to eql(true)
+    end
+    it 'Return false if the line is not empty' do
+      expect(python_file.blank_line?(line2)).to eql(false)
+    end
+  end
 end
 
 # rubocop:enable Layout/LineLength
