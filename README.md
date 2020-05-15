@@ -48,22 +48,6 @@ Avoid extraneous whitespace immediately before a comma, semicolon, or colon:
 ### Wrong:
 > if x == 4 : print x , y ; x , y = y , x
 
-More than one space around an assignment (or other) operator to align it with another:
-
-### Correct:
-> x = 1
-
-> y = 2
-
-> long_variable = 3
-
-### Wrong:
-> x             = 1
-
-> y             = 2
-
-> long_variable = 3
-
 ## Built With
 
 - Ruby 2.6.5
