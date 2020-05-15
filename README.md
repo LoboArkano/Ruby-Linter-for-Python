@@ -20,6 +20,45 @@ This Ruby linter can detect the following style errors:
 
 - Unindent does not match any outer indentation level
 
+### Good and Bad Practices
+
+- Imports should usually be on separate lines:
+
+> # Correct:
+> import os
+> import sys
+>
+> # Wrong:
+> import sys, os
+
+- Avoid extraneous whitespace immediately inside parentheses, brackets or braces:
+
+> # Correct:
+> spam(ham[1], {eggs: 2})
+>
+> # Wrong:
+> spam( ham[ 1 ], { eggs: 2 } )
+
+- Avoid extraneous whitespace immediately before a comma, semicolon, or colon:
+
+> # Correct:
+> if x == 4: print x, y; x, y = y, x
+>
+> # Wrong:
+> if x == 4 : print x , y ; x , y = y , x
+
+- More than one space around an assignment (or other) operator to align it with another:
+
+> # Correct:
+> x = 1
+> y = 2
+> long_variable = 3
+>
+> # Wrong:
+> x             = 1
+> y             = 2
+> long_variable = 3
+
 ## Built With
 
 - Ruby 2.6.5
@@ -28,13 +67,15 @@ This Ruby linter can detect the following style errors:
 
 ## Getting Started
 
-- Download the zip file and decompressed it
+- Download or clone the zip file
 
 - Right-click on the Ruby-Linter-for-Python folder and select Open Terminal Here
 
 - Now use this command to start the program: bin/main.rb
 
 - Paste the path file of your python file, like this /home/user/Projects/Python-test/test.py
+
+![2020-05-15 162312](https://user-images.githubusercontent.com/33432289/82097833-4d700000-96c9-11ea-9320-bf7899d302e6.jpg)
 
 ### Prerequisites
 
@@ -54,7 +95,7 @@ This Ruby linter can detect the following style errors:
 
 Contributions, issues and feature requests are welcome!
 
-Feel free to check the [issues page](issues/).
+Feel free to check the [issues page](https://github.com/LoboArkano/Ruby-Linter-for-Python/issues).
 
 ## Show your support
 
@@ -62,5 +103,4 @@ Give a ⭐️ if you like this project!
  
 ## 📝 License
 
-This project is for Microverse course purposes.
-
+This project is MIT licensed.
