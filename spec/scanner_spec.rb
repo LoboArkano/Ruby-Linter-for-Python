@@ -2,7 +2,11 @@
 
 require_relative '../lib/scanner.rb'
 
-describe 'Scanner' do
+RSpec.describe 'Scanner' do
+  before(:each) do
+    Scanner.send(:public, *Scanner.private_instance_methods)
+  end
+
   let(:python_file) { Scanner.scan_file('test.py') }
   describe '#scan_file' do
     it 'Return array with the lines of the file' do
