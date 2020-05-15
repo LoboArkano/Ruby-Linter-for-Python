@@ -29,6 +29,8 @@ class Scanner
     end
   end
 
+  private
+
   def max_line_length(index, line)
     @linter_errors[index + 1] = "Max line length is 79, yours line is #{line.length}" if line.length > 79
   end
