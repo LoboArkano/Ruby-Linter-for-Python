@@ -22,16 +22,17 @@ This Ruby linter can detect the following style errors:
 
 ### Good and Bad Practices
 
-- Imports should usually be on separate lines:
+Imports should usually be on separate lines:
 
 ### Correct:
 > import os
+
 > import sys
 
 ### Wrong:
 > import sys, os
 
-- Avoid extraneous whitespace immediately inside parentheses, brackets or braces:
+Avoid extraneous whitespace immediately inside parentheses, brackets or braces:
 
 ### Correct:
 > spam(ham[1], {eggs: 2})
@@ -39,7 +40,7 @@ This Ruby linter can detect the following style errors:
 ### Wrong:
 > spam( ham[ 1 ], { eggs: 2 } )
 
-- Avoid extraneous whitespace immediately before a comma, semicolon, or colon:
+Avoid extraneous whitespace immediately before a comma, semicolon, or colon:
 
 ### Correct:
 > if x == 4: print x, y; x, y = y, x
@@ -47,16 +48,20 @@ This Ruby linter can detect the following style errors:
 ### Wrong:
 > if x == 4 : print x , y ; x , y = y , x
 
-- More than one space around an assignment (or other) operator to align it with another:
+More than one space around an assignment (or other) operator to align it with another:
 
 ### Correct:
 > x = 1
+
 > y = 2
+
 > long_variable = 3
 
 ### Wrong:
 > x             = 1
+
 > y             = 2
+
 > long_variable = 3
 
 ## Built With
